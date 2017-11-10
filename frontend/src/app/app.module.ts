@@ -15,6 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppStateModule } from './state/app-state.module';
 import { UserService } from './user.service';
 
+import { XSRFStrategy, CookieXSRFStrategy } from '@angular/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +37,7 @@ import { UserService } from './user.service';
   providers: [
     UserService,
     { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('csrftoken', 'X-CSRFToken') },
   ],
   bootstrap: [AppComponent]
 })
